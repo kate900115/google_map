@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const PORT_NUMBER = 8080
 app.get('/', function(req, res){
-	res.send('Zhang Yuxuan!')
+	res.send('Yuxuan Zhang!')
 })
 
 app.listen(PORT_NUMBER, function(){
