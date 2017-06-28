@@ -9,7 +9,8 @@ app.get('/', function(req, res){
 });
 
 app.use('/css',express.static('css'));
+app.use('/js',express.static('js'));
 
 app.listen(PORT_NUMBER, function(){
-	console.log('Example app listening on port '+PORT_NUMBER+'!')
+	console.log('Example app listening on port '+PORT_NUMBER+'!');
 });
