@@ -1,0 +1,18 @@
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+html body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+html body h3 {
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+}
+html body #map {
+  height: 100%;
+  width: 100%;
+}
