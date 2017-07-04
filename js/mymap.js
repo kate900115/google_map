@@ -39,7 +39,7 @@ $(function(){
 					scaleSize: new google.maps.Size(10,17)
 				}	
 			});
-		marker.addListener('click', function(){
+			marker.addListener('click', function(){
 				service.getDetails(place, function(result, status){
 					if (status!==google.maps.places.PlacesServiceStatus.OK){
 						console.error(status);
@@ -115,6 +115,9 @@ $(function(){
 				$('#listbox-wrapper').addClass('visible');
 			});
 		}
+		$('#button-triangle').on('click',function(){
+			$('#listbox-wrapper').toggleClass('visible');
+		});
 	}
 	initMap();
 });
