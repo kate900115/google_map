@@ -13,6 +13,7 @@ app.get('/', function(req, res){
 
 app.use('/css',express.static('css'));
 app.use('/js',express.static('js'));
+app.use('/static', express.static('static'));
 
 app.get('/nearby_search', function(req, api_res){
 	var parameter = {
