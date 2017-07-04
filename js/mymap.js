@@ -56,7 +56,22 @@ $(function(){
 					'</div>';
 					infoWindow.setContent(content);
 					infoWindow.open(map, marker);
+					displayInfo(result);
 				});
+			});
+		}
+
+		function displayInfo(place){
+			service.getDetails(place, function(result, status){
+				if (status!== google.maps.places.PlacesServiceStatus.OK){
+					console.error(status);
+					return;
+				}
+				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':400, 'maxheight':300}));
+				$('.place-name').text(place.name);
+				$('.place-rating').text(place.rating);
+				$('.place-type').text(place.types);
+				$('#listbox-wrapper').show();
 			});
 		}
 	
