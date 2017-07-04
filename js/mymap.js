@@ -12,6 +12,8 @@ $(function(){
 
 		var service = new google.maps.places.PlacesService(map);
 		var previousInfoWindow = new google.maps.InfoWindow();
+			var previousMarker;
+			
 		var request = {
 			location: position,
 			radius: DEFAULT_RADIUS,
@@ -37,16 +39,21 @@ $(function(){
 					scaleSize: new google.maps.Size(10,17)
 				}	
 			});
-			marker.addListener('click', function(){
+		marker.addListener('click', function(){
 				service.getDetails(place, function(result, status){
 					if (status!==google.maps.places.PlacesServiceStatus.OK){
 						console.error(status);
 						return;
 					}
-					var temp = result.photos[0].getUrl({'maxWidth':100, 'maxheight':80});
-					console.log(temp);
+					if (previousMarker){
+						previousMarker.setAnimation(null);
+					}
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+					previousMarker = marker;
+					var pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
+					console.log(pic_url);
 					var content = 
-					'<div id="marker_content"><img src = "'+temp+'"></img>'+
+					'<div id="marker_content"><img src = "'+pic_url+'"></img>'+
 						'<p>'+result.name+'</p>'+
 					'</div>';
 					if (previousInfoWindow){
@@ -69,7 +76,7 @@ $(function(){
 					console.error(status);
 					return;
 				}
-				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':400, 'maxheight':300}));
+				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':408, 'maxheight':300}));
 				$('.place-name').text(place.name);
 				$('.place-rating').text('raing:'+place.rating);
 				$('.place-type').text('type:'+place.types[0]);
