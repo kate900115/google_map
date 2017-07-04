@@ -80,16 +80,16 @@ $(function(){
 				$('.place-name').text(place.name);
 				var stars;
 				if (place.rating===0.5){
-					stars = '&#2661';
-				}
-				else if (place.rating===1){
-					stars = '&#2665';
-				}
-				else if (place.rating===1.5){
 					stars = '♡';
 				}
-				else if (place.rating===2){
+				else if (place.rating===1){
 					stars = '♥';
+				}
+				else if (place.rating===1.5){
+					stars = '♥♡';
+				}
+				else if (place.rating===2){
+					stars = '♥♥';
 				}
 				else if (place.rating===2.5){
 					stars = '♥♥♡';
@@ -108,13 +108,11 @@ $(function(){
 				}
 				else {
 					stars = '♥♥♥♥♥';
-				}
-			
-
+				}	
 
 				$('.place-rating').text('raing:'+stars);
 				$('.place-type').text('type:'+place.types[0]);
-				$('#listbox-wrapper').show();
+				$('#listbox-wrapper').addClass('visible');
 			});
 		}
 	}

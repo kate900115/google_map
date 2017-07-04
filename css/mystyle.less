@@ -20,9 +20,13 @@ html{
 		#listbox-wrapper{
 			position:absolute;
 			top:0;
-			left:0;
+			left:-408px;
 			background-color:pink;
 			box-shadow:0px 0px 20px rgba(0,0,0,0.3);
+
+			.&visible{
+				left:0;
+			}
 
 			#button-triangle{
 				width:23px;
@@ -53,6 +57,7 @@ html{
 				width:100%;
 				overflow:hidden;
 				img{
+					width:408px;
 					top:-53px;
 					position: relative;
 				}
