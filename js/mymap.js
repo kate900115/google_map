@@ -69,8 +69,8 @@ $(function(){
 				}
 				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':400, 'maxheight':300}));
 				$('.place-name').text(place.name);
-				$('.place-rating').text(place.rating);
-				$('.place-type').text(place.types);
+				$('.place-rating').text('raing:'+place.rating);
+				$('.place-type').text('type:'+place.types[0]);
 				$('#listbox-wrapper').show();
 			});
 		}
