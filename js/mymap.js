@@ -40,7 +40,9 @@ $(function(){
 				}	
 			});
 			marker.addListener('click', function(){
-				service.getDetails(place, function(result, status){
+				service.getDetails({
+					placeId:place.place_id
+				}, function(result, status){
 					if (status!==google.maps.places.PlacesServiceStatus.OK){
 						console.error(status);
 						return;
