@@ -78,7 +78,41 @@ $(function(){
 				}
 				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':408, 'maxheight':300}));
 				$('.place-name').text(place.name);
-				$('.place-rating').text('raing:'+place.rating);
+				var stars;
+				if (place.rating===0.5){
+					stars = '&#2661';
+				}
+				else if (place.rating===1){
+					stars = '&#2665';
+				}
+				else if (place.rating===1.5){
+					stars = '♡';
+				}
+				else if (place.rating===2){
+					stars = '♥';
+				}
+				else if (place.rating===2.5){
+					stars = '♥♥♡';
+				}
+				else if (place.rating===3){
+					stars = '♥♥♥';
+				}
+				else if (place.rating===3.5){
+					stars = '♥♥♥♡';
+				}
+				else if (place.rating===4){
+					stars = '♥♥♥♥';
+				}
+				else if (place.rating===4.5){
+					stars = '♥♥♥♥♡';
+				}
+				else {
+					stars = '♥♥♥♥♥';
+				}
+			
+
+
+				$('.place-rating').text('raing:'+stars);
 				$('.place-type').text('type:'+place.types[0]);
 				$('#listbox-wrapper').show();
 			});
