@@ -37,7 +37,7 @@ $(function(){
 				map:map,
 				position: place.geometry.location,
 				icon:{
-					url:'/static/marker2.png',
+					url:'/static/heart.png',
 					anchor: new google.maps.Point(10,10),
 					scaleSize: new google.maps.Size(10,17)
 				}	
