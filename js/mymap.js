@@ -4,6 +4,7 @@ $(function(){
 	var DEFAULT_RADIUS = 5000;
 	var previousInfoWindow = new google.maps.InfoWindow();
 	var previousMarker;
+	var previousMarkers;
 	
 	function initMap(){
 		var AnnArbor = {lat:42.28, lng:-83.74};
@@ -38,6 +39,9 @@ $(function(){
 		});
 
 		function createMarker(place){
+			for (var i=0; i<previous.length; i++){
+				previousMarkers[i].close();
+			}
 			var marker= new google.maps.Marker({
 				map:map,
 				position: place.geometry.location,
@@ -80,6 +84,7 @@ $(function(){
 					displayInfo(result);
 				});
 			});
+			previousMarkers = marker;
 		}
 
 		function displayInfo(place){
