@@ -2,25 +2,42 @@ $(function(){
 	var DEFAULT_ZOOM =15;
 	var GOOGLE_API_KEY = 'AIzaSyD9SwX4CKr1CIRSVehIMKNsbHi2StHbCkM';
 	var DEFAULT_RADIUS = 5000;
-
+	var previousInfoWindow = new google.maps.InfoWindow();
+	var previousMarker;
+	
 	function initMap(){
-		var position = {lat:42.28, lng:-83.74};
+		var AnnArbor = {lat:42.28, lng:-83.74};
 		var map = new google.maps.Map(document.getElementById('map'),{
 			zoom: DEFAULT_ZOOM,
-			center: position
+			center: AnnArbor
 		});
 
-		var service = new google.maps.places.PlacesService(map);
-		var previousInfoWindow = new google.maps.InfoWindow();
-			var previousMarker;
+		
+/*		var request = {
+			'location': position,
+			'radius': DEFAULT_RADIUS,
+			'type': ['store']
+
+		};*/
+
+		var search_bar = new SearchBar(function(type){
+			var request = {
+				location:AnnArbor,
+				radius: DEFAULT_RADIUS,
+				type:type
+			};
+			getNearbySearch(map, request);
+		});
+		console.log("correct!!");
+		search_bar.addTo($('body'));
+
+
+	}
 			
-		var request = {
-			location: position,
-			radius: DEFAULT_RADIUS,
-			type: ['store']
-
-		};
-
+	
+	function getNearbySearch(map, request){
+		console.log("new request!");
+		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch(request, function(results, status){
 			if (status===google.maps.places.PlacesServiceStatus.OK){
 				for (var i=0; i<results.length; i++){
