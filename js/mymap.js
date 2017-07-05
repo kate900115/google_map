@@ -72,6 +72,7 @@ $(function(){
 					}
 					marker.setAnimation(google.maps.Animation.BOUNCE);
 					previousMarker = marker;
+					console.log(result);
 					var pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
 					console.log(pic_url);
 					var pic_vec = pic_url.split("w100-h80-");
@@ -107,31 +108,31 @@ $(function(){
 				$('#listbox-img img').attr('src', picurl);
 				$('.place-name').text(place.name);
 				var stars;
-				if (place.rating===0.5){
+				if (place.rating<0.5){
 					stars = '♡';
 				}
-				else if (place.rating===1){
+				else if (place.rating<1.2){
 					stars = '♥';
 				}
-				else if (place.rating===1.5){
+				else if (place.rating<1.7){
 					stars = '♥♡';
 				}
-				else if (place.rating===2){
+				else if (place.rating<2.2){
 					stars = '♥♥';
 				}
-				else if (place.rating===2.5){
+				else if (place.rating<2.7){
 					stars = '♥♥♡';
 				}
-				else if (place.rating===3){
+				else if (place.rating<3.2){
 					stars = '♥♥♥';
 				}
-				else if (place.rating===3.5){
+				else if (place.rating<3.7){
 					stars = '♥♥♥♡';
 				}
-				else if (place.rating===4){
+				else if (place.rating<4.2){
 					stars = '♥♥♥♥';
 				}
-				else if (place.rating===4.5){
+				else if (place.rating<4.7){
 					stars = '♥♥♥♥♡';
 				}
 				else {
@@ -140,6 +141,8 @@ $(function(){
 
 				$('.place-rating').text('raing:'+stars);
 				$('.place-type').text('type:'+place.types[0]);
+				$('#address').text('address:'+place.formatted_address);
+				$('#phone-num').text('phone:'+place.international_phone_number);
 				$('#listbox-wrapper').addClass('visible');
 			});
 		}
