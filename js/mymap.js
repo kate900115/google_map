@@ -22,8 +22,9 @@ $(function(){
 			getNearbySearch(map, request);
 		});
 		search_bar.addTo($('body'));
-
-
+		$('#button-triangle').on('click',function(){
+			$('#listbox-wrapper').toggleClass('visible');
+		});
 	}
 			
 	
@@ -142,9 +143,6 @@ $(function(){
 				$('#listbox-wrapper').addClass('visible');
 			});
 		}
-		$('#button-triangle').on('click',function(){
-			$('#listbox-wrapper').toggleClass('visible');
-		});
 	}
 	initMap();
 });
