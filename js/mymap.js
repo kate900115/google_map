@@ -4,7 +4,7 @@ $(function(){
 	var DEFAULT_RADIUS = 5000;
 	var previousInfoWindow = new google.maps.InfoWindow();
 	var previousMarker;
-	var previousMarkers;
+	var previousMarkers=[];
 	
 	function initMap(){
 		var AnnArbor = {lat:42.28, lng:-83.74};
@@ -29,6 +29,10 @@ $(function(){
 	
 	function getNearbySearch(map, request){
 		console.log("new request!");
+		for (var i=0; i<previousMarkers.length; i++){
+			previousMarkers[i].setVisible(false);
+		}
+		previousMarkers = [];
 		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch(request, function(results, status){
 			if (status===google.maps.places.PlacesServiceStatus.OK){
@@ -39,9 +43,6 @@ $(function(){
 		});
 
 		function createMarker(place){
-			for (var i=0; i<previous.length; i++){
-				previousMarkers[i].close();
-			}
 			var marker= new google.maps.Marker({
 				map:map,
 				position: place.geometry.location,
@@ -84,7 +85,7 @@ $(function(){
 					displayInfo(result);
 				});
 			});
-			previousMarkers = marker;
+			previousMarkers.push(marker);
 		}
 
 		function displayInfo(place){
