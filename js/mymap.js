@@ -139,10 +139,45 @@ $(function(){
 					stars = '♥♥♥♥♥';
 				}	
 
-				$('.place-rating').text('raing:'+stars);
+				$('.place-rating').text('raing:'+stars+' - '+place.rating);
 				$('.place-type').text('type:'+place.types[0]);
 				$('#address').text('address:'+place.formatted_address);
 				$('#phone-num').text('phone:'+place.international_phone_number);
+				$('#web').text('website:'+place.website);
+				var isopenning;
+				if (place.opening_hours.open_now){
+					isopenning = 'Open now';
+				}
+				else{
+					isopenning = 'Close now';
+				}
+				$('#isopen').text(isopenning);
+				$('li').remove();
+				for(var i=0; i<place.opening_hours.weekday_text.length; i++){
+					var weekday_opening = '<li>'+place.opening_hours.weekday_text[i]+'</li>';
+					$(weekday_opening).appendTo($('#open_hours'));
+					
+				}
+				var price;
+				if (place.price_level===1){
+					price='$';
+				}
+				else if(place.price_level===2){
+					price='$$';
+				}
+				else if(place.price_level===3){
+					price='$$$';
+				}
+				else if(place.price_level===4){
+					price='$$$$';
+				}
+				else if(place.price_level===5){
+					price='$$$$$';
+				}
+				else{
+					price='no price data';
+				}
+				$('#price').text('price: '+price);
 				$('#listbox-wrapper').addClass('visible');
 			});
 		}
