@@ -33,6 +33,12 @@ $(function(){
 			previousMarkers[i].setVisible(false);
 		}
 		previousMarkers = [];
+		if (previousInfoWindow){
+			previousInfoWindow.close();
+		}
+		if ($('#listbox-wrapper').hasClass('visible')){
+			$('#listbox-wrapper').toggleClass('visible');
+		}
 		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch(request, function(results, status){
 			if (status===google.maps.places.PlacesServiceStatus.OK){
