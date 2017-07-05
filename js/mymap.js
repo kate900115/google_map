@@ -54,8 +54,10 @@ $(function(){
 					previousMarker = marker;
 					var pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
 					console.log(pic_url);
+					var pic_vec = pic_url.split("w100-h80-");
+					var picurl=pic_vec[0]+pic_vec[1];
 					var content = 
-					'<div id="marker_content"><img src = "'+pic_url+'"></img>'+
+					'<div id="marker_content"><img src = "'+picurl+'"></img>'+
 						'<p>'+result.name+'</p>'+
 					'</div>';
 					if (previousInfoWindow){
@@ -66,7 +68,7 @@ $(function(){
 					infoWindow.setContent(content);
 					infoWindow.open(map, marker);
 					previousInfoWindow = infoWindow;
-				
+					$('#marker_content img').attr('width','100');	
 					displayInfo(result);
 				});
 			});
@@ -78,7 +80,11 @@ $(function(){
 					console.error(status);
 					return;
 				}
-				$('#listbox-img img').attr('src', place.photos[0].getUrl({'maxWidth':408, 'maxheight':300}));
+				var pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
+				var pic_vec= pic_url.split("w408-h300-");
+				var picurl=pic_vec[0]+pic_vec[1];
+				$('#listbox-img img').attr('src', picurl);
+				//$('#listbox-img img').atrr('width','408');
 				$('.place-name').text(place.name);
 				var stars;
 				if (place.rating===0.5){
