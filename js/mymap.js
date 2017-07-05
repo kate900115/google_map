@@ -11,15 +11,7 @@ $(function(){
 			zoom: DEFAULT_ZOOM,
 			center: AnnArbor
 		});
-
-		
-/*		var request = {
-			'location': position,
-			'radius': DEFAULT_RADIUS,
-			'type': ['store']
-
-		};*/
-
+	
 		var search_bar = new SearchBar(function(type){
 			var request = {
 				location:AnnArbor,
@@ -28,7 +20,6 @@ $(function(){
 			};
 			getNearbySearch(map, request);
 		});
-		console.log("correct!!");
 		search_bar.addTo($('body'));
 
 
@@ -101,7 +92,6 @@ $(function(){
 				var pic_vec= pic_url.split("w408-h300-");
 				var picurl=pic_vec[0]+pic_vec[1];
 				$('#listbox-img img').attr('src', picurl);
-				//$('#listbox-img img').atrr('width','408');
 				$('.place-name').text(place.name);
 				var stars;
 				if (place.rating===0.5){
