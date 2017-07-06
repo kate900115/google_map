@@ -25,11 +25,13 @@ $(function(){
 		$('#button-triangle').on('click',function(){
 			$('#listbox-wrapper').toggleClass('visible');
 		});
+		$('#listbox-wrapper').hide();
 	}
 			
 	
 	function getNearbySearch(map, request){
 		console.log("new request!");
+		$('#listbox-wrapper').show();		
 		for (var i=0; i<previousMarkers.length; i++){
 			previousMarkers[i].setVisible(false);
 		}
@@ -97,11 +99,12 @@ $(function(){
 		}
 
 		function displayInfo(place){
-			service.getDetails(place, function(result, status){
+				service.getDetails(place, function(result, status){
 				if (status!== google.maps.places.PlacesServiceStatus.OK){
 					console.error(status);
 					return;
 				}
+				$('#listbox-wrapper').addClass('visible');
 				var pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
 				var pic_vec= pic_url.split("w408-h300-");
 				var picurl=pic_vec[0]+pic_vec[1];
@@ -143,7 +146,12 @@ $(function(){
 				$('.place-type').text('type:'+place.types[0]);
 				$('#address').text('address:'+place.formatted_address);
 				$('#phone-num').text('phone:'+place.international_phone_number);
-				$('#web').text('website:'+place.website);
+				var web_addr = '<a>'+place.website+'</a>';
+				$('#web').empty();
+				$(web_addr).appendTo($('#web'));
+				$('#web a').attr('href',place.website);
+				
+			//	$('#web').text('website:'+place.website);
 				var isopenning;
 				if (place.opening_hours.open_now){
 					isopenning = 'Open now';
@@ -178,7 +186,7 @@ $(function(){
 					price='no price data';
 				}
 				$('#price').text('price: '+price);
-				$('#listbox-wrapper').addClass('visible');
+			
 			});
 		}
 	}
