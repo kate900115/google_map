@@ -82,6 +82,7 @@ $(function(){
 		});
 	}
 		function createMarker(map, place){
+			console.log(place);
 			var marker= new google.maps.Marker({
 				map:map,
 				position: place.geometry.location,
