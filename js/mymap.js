@@ -14,12 +14,19 @@ $(function(){
 		});
 	
 		var search_bar = new SearchBar(function(type){
-			var request = {
+			/*var request = {
 				location:AnnArbor,
 				radius: DEFAULT_RADIUS,
 				type:type
 			};
-			getNearbySearch(map, request);
+			getNearbySearch(map, request);*/
+			var request = {
+				location:AnnArbor,
+				radius: DEFAULT_RADIUS,
+				query:type
+			};
+			getTextSearch(map, request);
+			
 		});
 		search_bar.addTo($('body'));
 		$('#button-triangle').on('click',function(){
@@ -27,7 +34,30 @@ $(function(){
 		});
 		$('#listbox-wrapper').hide();
 	}
-			
+	
+	function getTextSearch(map, request){
+		console.log("new text request!");
+		$('#listbox-wrapper').show();		
+		for (var i=0; i<previousMarkers.length; i++){
+			previousMarkers[i].setVisible(false);
+		}
+		previousMarkers = [];
+		if (previousInfoWindow){
+			previousInfoWindow.close();
+		}
+		if ($('#listbox-wrapper').hasClass('visible')){
+			$('#listbox-wrapper').toggleClass('visible');
+		}
+		var service = new google.maps.places.PlacesService(map);
+  		service.textSearch(request, function(results, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+    			for (var i = 0; i < results.length; i++) {
+					var place = results[i];
+					createMarker(results[i]);
+				}
+			}
+		});
+	}
 	
 	function getNearbySearch(map, request){
 		console.log("new request!");
