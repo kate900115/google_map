@@ -54,7 +54,7 @@ $(function(){
 				console.log(results);
     			for (var i = 0; i < results.length; i++) {
 					var place = results[i];
-					createMarker(results[i]);
+					createMarker(map,results[i]);
 				}
 			}
 		});
