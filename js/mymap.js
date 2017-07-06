@@ -51,6 +51,7 @@ $(function(){
 		var service = new google.maps.places.PlacesService(map);
   		service.textSearch(request, function(results, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				console.log(results);
     			for (var i = 0; i < results.length; i++) {
 					var place = results[i];
 					createMarker(results[i]);
