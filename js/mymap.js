@@ -112,7 +112,10 @@ $(function(){
 					marker.setAnimation(google.maps.Animation.BOUNCE);
 					previousMarker = marker;
 					console.log(result);
-					var pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
+					var pic_url;
+					if (result.photos[0].length!==0){
+						pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
+					}
 					console.log(pic_url);
 					var pic_vec = pic_url.split("w100-h80-");
 					var picurl=pic_vec[0]+pic_vec[1];
