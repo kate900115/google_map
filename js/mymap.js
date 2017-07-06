@@ -50,7 +50,7 @@ $(function(){
 				}
 			}
 		});
-
+	}
 		function createMarker(place){
 			var marker= new google.maps.Marker({
 				map:map,
@@ -189,6 +189,6 @@ $(function(){
 			
 			});
 		}
-	}
+	
 	initMap();
 });
