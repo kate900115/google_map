@@ -62,6 +62,7 @@ $(function(){
 				}	
 			});
 			marker.addListener('click', function(){
+				var service = new google.maps.places.PlacesService(map);
 				service.getDetails({
 					placeId:place.place_id
 				}, function(result, status){
