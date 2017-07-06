@@ -14,19 +14,23 @@ $(function(){
 		});
 	
 		var search_bar = new SearchBar(function(type){
-			/*var request = {
-				location:AnnArbor,
-				radius: DEFAULT_RADIUS,
-				type:type
-			};
-			getNearbySearch(map, request);*/
-			var request = {
-				location:AnnArbor,
-				radius: DEFAULT_RADIUS,
-				query:type
-			};
-			getTextSearch(map, request);
-			
+			words = type.split(':');
+			if (words[0]=='nearby'){
+				var request = {
+					location:AnnArbor,
+					radius: DEFAULT_RADIUS,
+					type:words[1]
+				};
+				getNearbySearch(map, request);
+			}
+			if (words[0]=='find'){
+				var request = {
+					location:AnnArbor,
+					radius: DEFAULT_RADIUS,
+					query:words[1]
+				};
+				getTextSearch(map, request);
+			}
 		});
 		search_bar.addTo($('body'));
 		$('#button-triangle').on('click',function(){
