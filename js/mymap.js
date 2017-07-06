@@ -143,7 +143,11 @@ $(function(){
 					return;
 				}
 				$('#listbox-wrapper').addClass('visible');
-				var pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
+				var pic_url;
+				if (place.photos.length!==0){
+					pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
+				}
+				
 				var pic_vec= pic_url.split("w408-h300-");
 				var picurl=pic_vec[0]+pic_vec[1];
 				$('#listbox-img img').attr('src', picurl);
