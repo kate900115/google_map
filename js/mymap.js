@@ -46,12 +46,12 @@ $(function(){
 		service.nearbySearch(request, function(results, status){
 			if (status===google.maps.places.PlacesServiceStatus.OK){
 				for (var i=0; i<results.length; i++){
-					createMarker(results[i]);
+					createMarker(map,results[i]);
 				}
 			}
 		});
 	}
-		function createMarker(place){
+		function createMarker(map, place){
 			var marker= new google.maps.Marker({
 				map:map,
 				position: place.geometry.location,
@@ -99,7 +99,7 @@ $(function(){
 		}
 
 		function displayInfo(place){
-				service.getDetails(place, function(result, status){
+			service.getDetails(place, function(result, status){
 				if (status!== google.maps.places.PlacesServiceStatus.OK){
 					console.error(status);
 					return;
