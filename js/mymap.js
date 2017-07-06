@@ -93,13 +93,14 @@ $(function(){
 					infoWindow.open(map, marker);
 					previousInfoWindow = infoWindow;
 					$('#marker_content img').attr('width','100');	
-					displayInfo(result);
+					displayInfo(map,result);
 				});
 			});
 			previousMarkers.push(marker);
 		}
 
-		function displayInfo(place){
+		function displayInfo(map,place){
+			var service = new google.maps.places.PlacesService(map);
 			service.getDetails(place, function(result, status){
 				if (status!== google.maps.places.PlacesServiceStatus.OK){
 					console.error(status);
