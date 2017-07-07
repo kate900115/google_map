@@ -7,7 +7,7 @@ $(function(){
 	var previousMarkers=[];
 	
 	function initMap(){
-		var AnnArbor = {lat:42.28, lng:-83.74};
+		var AnnArbor = {lat:42.295, lng:-83.712};
 		var map = new google.maps.Map(document.getElementById('map'),{
 			zoom: DEFAULT_ZOOM,
 			center: AnnArbor
@@ -33,10 +33,25 @@ $(function(){
 			}
 		});
 		search_bar.addTo($('body'));
+		$('.search-bar').mouseover (function(){
+			console.log("help!!");
+			var help_box = '<div class="help_box"><div id="help-box-padding">'+'<p>HINT:</p>'+
+										'<li>Type "find:{place name}" to do text search</li>'+
+										'<li>Type "nearby:{place type}" to do nearby search</li>'+
+										 '</p></div>';
+			$(help_box).appendTo($('body'));
+		});
+		$('.search-bar').mouseout(function(){
+			console.log("no help!");
+			$('div').remove('.help_box');
+			
+
+		});
 		$('#button-triangle').on('click',function(){
 			$('#listbox-wrapper').toggleClass('visible');
 		});
 		$('#listbox-wrapper').hide();
+
 	}
 	
 	function getTextSearch(map, request){
@@ -112,13 +127,13 @@ $(function(){
 					marker.setAnimation(google.maps.Animation.BOUNCE);
 					previousMarker = marker;
 					console.log(result);
-					var pic_url;
-					if (result.photos[0].length!==0){
-						pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
+					var picurl;
+					if (result.photos){
+						var pic_url = result.photos[0].getUrl({'maxWidth':100, 'maxHeight':80});
+						console.log(pic_url);
+						var pic_vec = pic_url.split("w100-h80-");
+						picurl=pic_vec[0]+pic_vec[1];
 					}
-					console.log(pic_url);
-					var pic_vec = pic_url.split("w100-h80-");
-					var picurl=pic_vec[0]+pic_vec[1];
 					var content = 
 					'<div id="marker_content"><img src = "'+picurl+'"></img>'+
 						'<p>'+result.name+'</p>'+
@@ -146,15 +161,16 @@ $(function(){
 					return;
 				}
 				$('#listbox-wrapper').addClass('visible');
-				var pic_url;
+				var picurl;
 				if (place.photos.length!==0){
-					pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
+					var pic_url=place.photos[0].getUrl({'maxWidth':408, 'maxHeight':300});
+					var pic_vec= pic_url.split("w408-h300-");
+					picurl=pic_vec[0]+pic_vec[1];
 				}
-				
-				var pic_vec= pic_url.split("w408-h300-");
-				var picurl=pic_vec[0]+pic_vec[1];
 				$('#listbox-img img').attr('src', picurl);
-				$('.place-name').text(place.name);
+				var place_name='<p id="name">'+place.name+'</p>';
+				$('.place-name').empty();
+				$(place_name).appendTo($('.place-name'));
 				var stars;
 				if (place.rating<0.5){
 					stars = '♡';
