@@ -35,7 +35,7 @@ $(function(){
 		search_bar.addTo($('body'));
 		$('.search-bar').mouseover (function(){
 			console.log("help!!");
-			var help_box = '<div class="help_box"><div id="help-box-padding">'+'<p>HINT:</p>'+
+			var help_box = '<div class="help_box"><div id="help-box-title">HINT</div><div id="help-box-padding">'+
 										'<li>Type "find:{place name}" to do text search</li>'+
 										'<li>Type "nearby:{place type}" to do nearby search</li>'+
 										 '</p></div>';
